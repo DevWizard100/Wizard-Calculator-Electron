@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wizard Calculator | Settings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;1,600&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="shortcut icon" href="img/webiconwizard.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="text/javascript" src="script.js" defer></script>
+
+  <script type="text/javascript" src="script.js" defer></script>
+</head>
+
+<body onload="closeNav2()">
+  <div class="menu">
+
+    <button class="btn" onclick="openNav()">
+      <i class="fa fa-bars"></i></button>
+    <p class="titlebar1">Settings</p>
+
+  </div>
+
+  <div id="myProgress">
+    <div id="myBar"></div>
+  </div>
+
+  <div>
+    <h1>App Setup</h1>
+    <h2>About</h2>
+    <h3>Wizard Calculator 1.0.0 <p>© 2022 Wizard.</p>
+      <p id="System1"></p>
+    </h3>
+    <div class="languagesbutton">
+      <button onclick="OpenWindow()" class="css-button-gradient--8">Show Services</button>
+    </div>
+  </div>
+
+  <body>
+
+    <!-- Navgationsleiste -->
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="index.html">Start</a>
+      <a href="Services2.html">Services</a>
+      <a href="Settings.html">Settings</a>
+    </div>
+
+
+    <script>
+
+      //Other JavaScript Features
+      function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+      }
+
+
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+      }
+
+      function Notify1() {
+        window.alert("This feature is still under development")
+      }
+
+      function OpenWindow() {
+        let myWindow = window.open("Services.html", "newWindow", "width=300,height=450");
+      }
+
+      //Benachrichtigungen der App!
+      function Notify2() {
+        if (!("Notification" in window)) {
+          alert("This browser does not support system notifications");
+        }
+        else if (Notification.permission === "granted") {
+          notify();
+        }
+        else if (Notification.permission !== 'denied') {
+          Notification.requestPermission(function (permission) {
+            if (permission === "granted") {
+              notify();
+            }
+          });
+        }
+
+        function notify() {
+          var notification = new Notification('Wizard Calculator', {
+            icon: 'https://th.bing.com/th/id/OIP.fFyd-n5GuX7NN0WLbJ-LkgHaHv?pid=ImgDet&rs=1',
+            body: "Hey! This feature is still under development",
+          });
+
+          notification.onclick = function () {
+            window.open("http://carnes.cc");
+          };
+          setTimeout(notification.close.bind(notification), 7000);
+        }
+
+
+      }
+
+      //Menü Ladebalken!
+      var i = 0;
+      function move() {
+        if (i == 0) {
+          i = 1;
+          var elem = document.getElementById("myBar");
+          var width = 1;
+          var id = setInterval(frame, 10);
+          function frame() {
+            if (width >= 100) {
+              clearInterval(id);
+              i = 0;
+            } else {
+              width++;
+              elem.style.width = width + "%";
+            }
+          }
+        }
+      }
+
+      move()
+
+      // function openwebside() {
+      // window.open("https://www.w3schools.com");
+      // }
+
+
+      // function yourFunction(){
+      // setTimeout(yourFunction, 500);
+      //}
+
+
+    </script>
+
+    <style>
+      body {
+        background-color: var(--resultarea-primary);
+      }
+
+      audio {
+        background-color: black;
+        color: pink;
+      }
+
+      h1 {
+        color: white;
+        font-size: 22px;
+        padding-left: 20px;
+      }
+
+      h2 {
+        color: white;
+        font-size: 18px;
+        padding-left: 20px;
+      }
+
+      h3 {
+        color: white;
+        font-size: 18px;
+        padding-left: 20px;
+        font-weight: 100;
+        line-height: 1px;
+      }
+
+      .languages1 {
+        background-color: rgb(30, 83, 255);
+        border-radius: 7px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        transition: 100ms;
+        border: none;
+      }
+
+      .languagesbutton {
+        padding-left: 18px;
+        padding-top: 5px;
+      }
+
+      .languages1:hover {
+        background-color: rgb(62, 107, 255);
+      }
+
+
+      .css-button-gradient--8 {
+        min-width: 50px;
+        height: 30px;
+        color: #fff;
+        padding: 5px 10px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        display: inline-block;
+        outline: none;
+        border-radius: 5px;
+        border: none;
+        background-size: 100% auto;
+        background-image: linear-gradient(to right top, #252b6b, #7d2e79, #c4346e, #f2594f, #ff9421);
+      }
+
+      .css-button-gradient--8:hover {
+        background-position: right center;
+      }
+
+      .css-button-gradient--8:active {
+        top: 2px;
+      }
+    </style>
+
+  </body>
+
+</html>

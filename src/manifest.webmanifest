@@ -1,0 +1,10 @@
+{
+    "name": "Wizard Calculator",
+    "short_name": "Wizard Calculator",
+    "theme_color": "#121216",
+    "background_color": "#121216",
+    "display": "standalone",
+    "orientation": "portrait",
+    "scope": "/",
+    "start_url": "/index.html"
+}

@@ -37,8 +37,17 @@
         let container = document.getElementById('resultArea');
 
         if (container.innerHTML == "0") {
-            container.innerText = "";
-            document.getElementById('resultArea').innerHTML += operation;
+
+            if(operation == ".")
+            {
+                document.getElementById("resultArea").innerHTML += operation;
+            }
+            else
+            {
+                container.innerText = "";
+                document.getElementById('resultArea').innerHTML += operation;
+            }
+
         } else {
             document.getElementById("resultArea").innerHTML += operation;
         }
@@ -51,6 +60,23 @@
         changetasksize();
     }
 
+    function addpi() {
+        let container = document.getElementById("resultArea");
+
+        if(container.innerText.endsWith(" ×"))
+        {
+            container.innerHTML += "π";
+        }
+        else
+        {
+            container.innerHTML += " × π";
+        }
+
+        let QuickResult = document.getElementById("QuickResult")
+        QuickResult.innerHTML = container.innerText;
+
+        calculateQuickResult();
+    }
     function calculateResult() {
         let container = document.getElementById('resultArea');
 
@@ -62,6 +88,11 @@
         while (container.innerHTML.includes("×")) {
             let calculatemulti = container.innerText.replace("×", "*")
             container.innerHTML = calculatemulti;
+        }
+
+        while (container.innerHTML.includes("π")) {
+            let calculatepi = container.innerText.replace("π", "3.1415926535897932384626433832795");
+            container.innerHTML = calculatepi;
         }
 
         let result = eval(container.innerHTML);
@@ -76,6 +107,7 @@
         } else {
             // Fenster ist kleiner oder gleich 800 Pixel breit und 600 Pixel hoch
         }
+
     }
 
     function changetasksize() {
@@ -83,12 +115,10 @@
             if (document.getElementById("resultArea").innerText.length > 11) {
                 document.getElementById("resultArea").style.fontSize = "34px";
             } else {
-                document.getElementById("resultArea").style.fontSize= "45px";
+                document.getElementById("resultArea").style.fontSize = "45px";
             }
-        }
-        else
-        {
-            document.getElementById("resultArea").style.fontSize= "45px";
+        } else {
+            document.getElementById("resultArea").style.fontSize = "45px";
         }
     }
 
@@ -106,8 +136,20 @@
             container.innerHTML = calculatemulti;
         }
 
-        let result = eval(container.innerHTML);
-        container.innerHTML = result;
+        while (container.innerHTML.includes("π")) {
+            let calculatepi = container.innerText.replace("π", "3.14159265358979");
+            container.innerHTML = calculatepi;
+        }
+
+
+        try {
+            let result = eval(container.innerHTML);
+            container.innerHTML = result;
+        }
+        catch
+        {
+            container.innerHTML = "";
+        }
     }
 
     function root2() {
@@ -138,6 +180,7 @@
         while (container.innerHTML == "") {
             container.innerHTML = "0";
         }
+
         changetasksize();
 
         let QuickResult = document.getElementById("QuickResult")
@@ -152,7 +195,7 @@
         container.innerHTML = "0";
 
         document.getElementById("QuickResult").innerText = "";
-        document.getElementById("resultArea").style.fontSize= "45px";
+        document.getElementById("resultArea").style.fontSize = "45px";
     }
 
     function ExtendWindowSize() {
@@ -166,8 +209,6 @@
         window.resizeTo(328, 558)
     }
 
-
-    //test Message 2
 </script>
 </head>
 
@@ -192,8 +233,13 @@
 </div>
 
 
-<div id="resultArea"></div>
+<div id="resultArea">0</div>
 
+<div id="MessageBox">Copied!</div>
+
+<script>
+ //document.getElementById("MessageBox").style.display = "block";
+</script>
 
 <div id="QuickResultAreaStyle">
     <div id="QuickResultArea">
@@ -201,9 +247,26 @@
     </div>
 </div>
 
+
 <style>
+    #MessageBox {
+        background-color: #23232D;
+        position: absolute;
+        top: 12%;
+        color: white;
+        right: 10px;
+        transition: ease-in-out 200ms;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        padding: 10px;
+        border-radius: 15px;
+        display: none;
+    }
+
+
     .Minimizebtn {
-     position: absolute;
+        position: absolute;
         right: 10px;
         background-color: #22222b;
         border: none;
@@ -213,11 +276,11 @@
         padding-bottom: 5px;
         cursor: pointer;
         transition: ease-in-out 100ms;
-       }
+    }
 
     .Minimizebtn:hover {
-    background-color:#2e2e3a ;
-           }
+        background-color: #2e2e3a;
+    }
 
     .Extendbtn {
         position: absolute;
@@ -233,7 +296,7 @@
     }
 
     .Extendbtn:hover {
-        background-color:#2e2e3a ;
+        background-color: #2e2e3a;
     }
 
     #QuickResultAreaStyle {
@@ -256,14 +319,20 @@
 
     .ResultInfo {
         position: absolute;
-        left: 10px;
+        left: 12px;
         font-size: 17px;
+        user-select: none;
     }
 
     #QuickResult {
         position: absolute;
         right: 24px;
         font-size: 17px;
+        cursor: progress;
+    }
+
+    #QuickResult:hover {
+        color: rgba(255, 255, 255, 0.623);
     }
 </style>
 
@@ -291,6 +360,7 @@
         <td onclick="appendOperation(8)">8</td>
         <td onclick="appendOperation(9)">9</td>
         <td onclick="appendOperation(' × ')" class="highlight">x</td>
+        <td class="ErweiterteFunktionen" onclick="addpi()">π</td>
     </tr>
 
     <tr>

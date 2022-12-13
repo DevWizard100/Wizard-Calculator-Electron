@@ -13,7 +13,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
     <link rel="manifest" href="manifest.webmanifest">
     <link rel="shortcut icon" href="img/webiconwizard.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -43,13 +43,67 @@
             document.getElementById("resultArea").innerHTML += operation;
         }
 
+
+        let QuickResult = document.getElementById("QuickResult")
+        QuickResult.innerHTML = container.innerText;
+
+        calculateQuickResult();
+        changetasksize();
     }
 
     function calculateResult() {
         let container = document.getElementById('resultArea');
 
         while (container.innerHTML.includes("^")) {
-            container.innerText.replace("^", "**");
+            let containerresult = container.innerText.replace("^", "**");
+            container.innerHTML = containerresult;
+        }
+
+        while (container.innerHTML.includes("×")) {
+            let calculatemulti = container.innerText.replace("×", "*")
+            container.innerHTML = calculatemulti;
+        }
+
+        let result = eval(container.innerHTML);
+        container.innerHTML = result;
+
+        document.getElementById("QuickResult").innerHTML = "";
+
+        if (window.innerWidth < 400 && window.innerHeight < 558) {
+            roundresult();
+
+
+        } else {
+            // Fenster ist kleiner oder gleich 800 Pixel breit und 600 Pixel hoch
+        }
+    }
+
+    function changetasksize() {
+        if (window.innerWidth < 400 && window.innerHeight < 558) {
+            if (document.getElementById("resultArea").innerText.length > 11) {
+                document.getElementById("resultArea").style.fontSize = "34px";
+            } else {
+                document.getElementById("resultArea").style.fontSize= "45px";
+            }
+        }
+        else
+        {
+            document.getElementById("resultArea").style.fontSize= "45px";
+        }
+    }
+
+    function calculateQuickResult() {
+
+        let container = document.getElementById('QuickResult');
+
+        while (container.innerHTML.includes("^")) {
+            let calculateexponent = container.innerText.replace("^", "**");
+            container.innerHTML = calculateexponent;
+        }
+
+        while (container.innerHTML.includes("×")) {
+            let calculatemulti = container.innerText.replace("×", "*")
+            container.innerHTML = calculatemulti;
         }
 
         let result = eval(container.innerHTML);
@@ -84,320 +138,394 @@
         while (container.innerHTML == "") {
             container.innerHTML = "0";
         }
+        changetasksize();
+
+        let QuickResult = document.getElementById("QuickResult")
+        QuickResult.innerHTML = container.innerText;
+        calculateQuickResult();
     }
 
     function deleteall() {
         let container = document.getElementById('resultArea');
         container.innerHTML = container.innerHTML.slice(0, -100)
+
+        container.innerHTML = "0";
+
+        document.getElementById("QuickResult").innerText = "";
+        document.getElementById("resultArea").style.fontSize= "45px";
     }
 
-    function resultArealight() {
-        let element = document.getElementById("resultArea")
-        element.classList.toggle("resultArealight")
+    function ExtendWindowSize() {
+
+        window.resizeTo(405, 558);
+
+        // window.resizeTo(328, 558);
+    }
+
+    function MinimizeWindowSize() {
+        window.resizeTo(328, 558)
     }
 
 </script>
 </head>
 
 <body>
-    <div class="menu">
+<div class="menu">
 
-        <button class="btn" onclick="openNav()">
-            <i class="fa fa-bars"></i></button>
-        <p class="titlebar1">Start</p>
+    <button class="btn" onclick="openNav()">
+        <i class="fa fa-bars"></i></button>
+    <p class="titlebar1">Start</p>
+
+    <button onclick="ExtendWindowSize()" class="Extendbtn">Extend</button>
+    <button onclick="MinimizeWindowSize()" class="Minimizebtn">Minimize</button>
+</div>
+
+
+<div class="menu2">
+
+</div>
+
+<div id="myProgress">
+    <div id="myBar"></div>
+</div>
+
+
+<div id="resultArea"></div>
+
+
+<div id="QuickResultAreaStyle">
+    <div id="QuickResultArea">
+        <span class="ResultInfo">Result</span> <span id="QuickResult"></span>
     </div>
+</div>
+
+<style>
+    .Minimizebtn {
+     position: absolute;
+        right: 10px;
+        background-color: #22222b;
+        border: none;
+        color: white;
+        border-radius: 4px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        cursor: pointer;
+        transition: ease-in-out 100ms;
+       }
+
+    .Minimizebtn:hover {
+    background-color:#2e2e3a ;
+           }
+
+    .Extendbtn {
+        position: absolute;
+        right: 10px;
+        background-color: #22222b;
+        border: none;
+        color: white;
+        border-radius: 4px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        cursor: pointer;
+        transition: ease-in-out 100ms;
+    }
+
+    .Extendbtn:hover {
+        background-color:#2e2e3a ;
+    }
+
+    #QuickResultAreaStyle {
+
+        background-color: var(--resultarea-primary);
+        width: 100%;
+    }
+
+    #QuickResultArea {
+        height: 7.3vh;
+        color: white;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        background-color: #191922;
+        border-radius: 15px;
+        margin-left: 3px;
+        margin-right: 3px;
+    }
+
+    .ResultInfo {
+        position: absolute;
+        left: 10px;
+        font-size: 17px;
+    }
+
+    #QuickResult {
+        position: absolute;
+        right: 24px;
+        font-size: 17px;
+    }
+</style>
 
 
-    <div class="menu2">
-
-    </div>
-
-    <div id="myProgress">
-        <div id="myBar"></div>
-    </div>
-
-
-    <div id="resultArea"></div>
-
-
-    <div id="QuickResultAreaStyle">
-        
-    </div>
-
-    <style>
-        #QuickResultAreaStyle {
-            height: 7vh;
-            background-color: #191922;
-            color: white;
-            font-size: 24px;
-            display: flex;
-            align-items: center;
-            border-radius: 15px;
-            background-color: var(--resultarea-primary);
-        }
-
-    
-    </style>
-
-
-    <table>
-        <tr>
-            <td onclick="root2()">x²</td>
-            <td id="root1" onclick="calculateroot()">√</td>
-            <td onclick="deleteall()">C</td>
-            <td onclick="deleteLast()"><span style="display: flex; justify-content: center; font-size: 22px;"
-                    class="material-icons">
+<table>
+    <tr>
+        <td onclick="root2()">x²</td>
+        <td id="root1" onclick="calculateroot()">√</td>
+        <td onclick="deleteall()">C</td>
+        <td onclick="deleteLast()"><span style="display: flex; justify-content: center; font-size: 22px;"
+                                         class="material-icons">
                     backspace
                 </span></td>
-        </tr>
-        <tr>
-            <td onclick="appendOperation(' ( ')">(</td>
-            <td onclick="appendOperation(' ) ')">)</td>
-            <td onclick="roundresult()">r</td>
-            <td onclick="appendOperation(' / ')" class="highlight">/</td>
-        </tr>
-        <tr>
-            <td onclick="appendOperation(7)">7</td>
-            <td onclick="appendOperation(8)">8</td>
-            <td onclick="appendOperation(9)">9</td>
-            <td onclick="appendOperation(' * ')" class="highlight">x</td>
-        </tr>
 
-        <tr>
-            <td onclick="appendOperation(4)">4</td>
-            <td onclick="appendOperation(5)">5</td>
-            <td onclick="appendOperation(6)">6</td>
-            <td onclick="appendOperation(' + ')" class="highlight">+</td>
-        </tr>
+    </tr>
+    <tr>
+        <td onclick="appendOperation(' ( ')">(</td>
+        <td onclick="appendOperation(' ) ')">)</td>
+        <td onclick="roundresult()">r</td>
+        <td onclick="appendOperation(' / ')" class="highlight">/</td>
+        <td class="ErweiterteFunktionen" onclick="appendOperation('^')">^</td>
+    </tr>
+    <tr>
+        <td onclick="appendOperation(7)">7</td>
+        <td onclick="appendOperation(8)">8</td>
+        <td onclick="appendOperation(9)">9</td>
+        <td onclick="appendOperation(' × ')" class="highlight">x</td>
+    </tr>
 
-        <tr>
-            <td onclick="appendOperation(1)">1</td>
-            <td onclick="appendOperation(2)">2</td>
-            <td onclick="appendOperation(3)">3</td>
-            <td onclick="appendOperation(' - ')" class="highlight">-</td>
-        </tr>
+    <tr>
+        <td onclick="appendOperation(4)">4</td>
+        <td onclick="appendOperation(5)">5</td>
+        <td onclick="appendOperation(6)">6</td>
+        <td onclick="appendOperation(' + ')" class="highlight">+</td>
+    </tr>
 
-        <tr>
-            <td class="highlight" colspan="2" onclick="appendOperation(0)">0</td>
-            <td onclick="appendOperation('.')">.</td>
-            <td onclick="calculateResult()" id="result">=</td>
-        </tr>
-    </table>
+    <tr>
+        <td onclick="appendOperation(1)">1</td>
+        <td onclick="appendOperation(2)">2</td>
+        <td onclick="appendOperation(3)">3</td>
+        <td onclick="appendOperation(' - ')" class="highlight">-</td>
+    </tr>
 
-
-    <body>
-
-        <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a onclick="notify3(), closeNav()" href="#">Start</a>
-            <a href="Services2.html">Services</a>
-            <a href="Settings.html">Settings</a>
-
-        </div>
+    <tr>
+        <td class="highlight" colspan="2" onclick="appendOperation(0)">0</td>
+        <td onclick="appendOperation('.')">.</td>
+        <td onclick="calculateResult()" id="result">=</td>
+    </tr>
+</table>
 
 
-        <script>
+<body>
 
-            //Other JavaScript Features
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a onclick="notify3(), closeNav()" href="#">Start</a>
+    <a href="Services2.html">Services</a>
+    <a href="Settings.html">Settings</a>
 
-            function openNav() {
-                document.getElementById("mySidenav").style.width = "250px";
-                document.getElementById("main").style.marginLeft = "250px";
-            }
-
-            function closeNav() {
-                document.getElementById("mySidenav").style.width = "0";
-                document.getElementById("main").style.marginLeft = "0";
-            }
+</div>
 
 
-            //Benachrichtigungen der App
-            function Notify2() {
-                if (!("Notification" in window)) {
-                    alert("This browser does not support system notifications");
-                } else if (Notification.permission === "granted") {
+<script>
+
+    //Other JavaScript Features
+
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+    }
+
+
+    //Benachrichtigungen der App
+    function Notify2() {
+        if (!("Notification" in window)) {
+            alert("This browser does not support system notifications");
+        } else if (Notification.permission === "granted") {
+            notify();
+        } else if (Notification.permission !== 'denied') {
+            Notification.requestPermission(function (permission) {
+                if (permission === "granted") {
                     notify();
-                } else if (Notification.permission !== 'denied') {
-                    Notification.requestPermission(function (permission) {
-                        if (permission === "granted") {
-                            notify();
-                        }
-                    });
                 }
+            });
+        }
 
-                function notify() {
-                    var notification = new Notification('Wizard Calculator', {
-                        icon: 'https://th.bing.com/th/id/OIP.fFyd-n5GuX7NN0WLbJ-LkgHaHv?pid=ImgDet&rs=1',
-                        body: "Hey! This feature is still under development",
-                    });
+        function notify() {
+            var notification = new Notification('Wizard Calculator', {
+                icon: 'https://th.bing.com/th/id/OIP.fFyd-n5GuX7NN0WLbJ-LkgHaHv?pid=ImgDet&rs=1',
+                body: "Hey! This feature is still under development",
+            });
 
-                    notification.onclick = function () {
-                        window.open("http://carnes.cc");
-                    };
-                    setTimeout(notification.close.bind(notification), 7000);
-                }
-            }
-
-            function notify3() {
-                if (!("Notification" in window)) {
-                    alert("This browser does not support system notifications");
-                } else if (Notification.permission === "granted") {
-                    notify5();
-                } else if (Notification.permission !== 'denied') {
-                    Notification.requestPermission(function (permission) {
-                        if (permission === "granted") {
-                            notify5();
-                        }
-                    });
-                }
-
-                function notify5() {
-                    var notification = new Notification('Wizard Calculator', {
-                        icon: 'https://th.bing.com/th/id/OIP.fFyd-n5GuX7NN0WLbJ-LkgHaHv?pid=ImgDet&rs=1',
-                        body: "You are already on the start :)",
-                    });
-
-                    notification.onclick = function () {
-                        window.open("http://carnes.cc");
-                    };
-                    setTimeout(notification.close.bind(notification), 7000);
-                }
-            }
-
-
-            function OpenWindow() {
-                let myWindow = window.open("newFile.html", "newWindow", "width=500,height=700");
-            }
-
-
-            //Menü Ladebalken!
-            var i = 0;
-
-            function move() {
-                if (i == 0) {
-                    i = 1;
-                    var elem = document.getElementById("myBar");
-                    var width = 1;
-                    var id = setInterval(frame, 10);
-
-                    function frame() {
-                        if (width >= 100) {
-                            clearInterval(id);
-                            i = 0;
-                        } else {
-                            width++;
-                            elem.style.width = width + "%";
-                        }
-                    }
-                }
-            }
-
-            move()
-
-
-            // Alle Keybinds für die Tastatur!
-            document.onkeydown = function (e) {
-                let keyCode = e.keyCode;
-                if (keyCode == 48) {
-                    appendOperation(0);
-                }
-                if (keyCode == 49) {
-                    appendOperation(1);
-                }
-                if (keyCode == 50) {
-                    appendOperation(2);
-                }
-                if (keyCode == 51) {
-                    appendOperation(3);
-                }
-                if (keyCode == 52) {
-                    appendOperation(4);
-                }
-                if (keyCode == 53) {
-                    appendOperation(5);
-                }
-                if (keyCode == 54) {
-                    appendOperation(6);
-                }
-                if (keyCode == 55) {
-                    appendOperation(7);
-                }
-                if (keyCode == 56) {
-                    appendOperation(8);
-                }
-                if (keyCode == 57) {
-                    appendOperation(9);
-                }
-                if (keyCode == 8) {
-                    deleteLast();
-                }
-                if (keyCode == 27) {
-                    deleteall();
-                }
-                if (keyCode == 111) {
-                    appendOperation(' / ');
-                }
-                if (keyCode == 106) {
-                    appendOperation(' * ');
-                }
-                if (keyCode == 107) {
-                    appendOperation(' + ');
-                }
-                if (keyCode == 109) {
-                    appendOperation(' - ');
-                }
-                if (keyCode == 110) {
-                    appendOperation('.');
-                }
-                if (keyCode == 188) {
-                    appendOperation('.');
-                }
-                if (keyCode == 13) {
-                    calculateResult();
-                }
-                if (event.shiftKey && event.keyCode == 56) {
-                    deleteLast();
-                    appendOperation(' ( ');
-                }
-                if (event.shiftKey && event.keyCode == 57) {
-                    deleteLast();
-                    appendOperation(' ) ');
-                }
-
-                //Alle Zahlen nur für das Nummpad!
-                if (keyCode == 96) {
-                    appendOperation(0);
-                }
-                if (keyCode == 97) {
-                    appendOperation(1);
-                }
-                if (keyCode == 98) {
-                    appendOperation(2);
-                }
-                if (keyCode == 99) {
-                    appendOperation(3);
-                }
-                if (keyCode == 100) {
-                    appendOperation(4);
-                }
-                if (keyCode == 101) {
-                    appendOperation(5);
-                }
-                if (keyCode == 102) {
-                    appendOperation(6);
-                }
-                if (keyCode == 103) {
-                    appendOperation(7);
-                }
-                if (keyCode == 104) {
-                    appendOperation(8);
-                }
-                if (keyCode == 105) {
-                    appendOperation(9);
-                }
-                ;
+            notification.onclick = function () {
+                window.open("http://carnes.cc");
             };
-        </script>
-    </body>
+            setTimeout(notification.close.bind(notification), 7000);
+        }
+    }
+
+    function notify3() {
+        if (!("Notification" in window)) {
+            alert("This browser does not support system notifications");
+        } else if (Notification.permission === "granted") {
+            notify5();
+        } else if (Notification.permission !== 'denied') {
+            Notification.requestPermission(function (permission) {
+                if (permission === "granted") {
+                    notify5();
+                }
+            });
+        }
+
+        function notify5() {
+            var notification = new Notification('Wizard Calculator', {
+                icon: 'https://th.bing.com/th/id/OIP.fFyd-n5GuX7NN0WLbJ-LkgHaHv?pid=ImgDet&rs=1',
+                body: "You are already on the start :)",
+            });
+
+            notification.onclick = function () {
+                window.open("http://carnes.cc");
+            };
+            setTimeout(notification.close.bind(notification), 7000);
+        }
+    }
+
+
+    function OpenWindow() {
+        let myWindow = window.open("newFile.html", "newWindow", "width=500,height=700");
+    }
+
+
+    //Menü Ladebalken!
+    var i = 0;
+
+    function move() {
+        if (i == 0) {
+            i = 1;
+            var elem = document.getElementById("myBar");
+            var width = 1;
+            var id = setInterval(frame, 10);
+
+            function frame() {
+                if (width >= 100) {
+                    clearInterval(id);
+                    i = 0;
+                } else {
+                    width++;
+                    elem.style.width = width + "%";
+                }
+            }
+        }
+    }
+
+    move()
+
+
+    // Alle Keybinds für die Tastatur!
+    document.onkeydown = function (e) {
+        let keyCode = e.keyCode;
+        if (keyCode == 48) {
+            appendOperation(0);
+        }
+        if (keyCode == 49) {
+            appendOperation(1);
+        }
+        if (keyCode == 50) {
+            appendOperation(2);
+        }
+        if (keyCode == 51) {
+            appendOperation(3);
+        }
+        if (keyCode == 52) {
+            appendOperation(4);
+        }
+        if (keyCode == 53) {
+            appendOperation(5);
+        }
+        if (keyCode == 54) {
+            appendOperation(6);
+        }
+        if (keyCode == 55) {
+            appendOperation(7);
+        }
+        if (keyCode == 56) {
+            appendOperation(8);
+        }
+        if (keyCode == 57) {
+            appendOperation(9);
+        }
+        if (keyCode == 8) {
+            deleteLast();
+        }
+        if (keyCode == 27) {
+            deleteall();
+        }
+        if (keyCode == 111) {
+            appendOperation(' / ');
+        }
+        if (keyCode == 106) {
+            appendOperation(' * ');
+        }
+        if (keyCode == 107) {
+            appendOperation(' + ');
+        }
+        if (keyCode == 109) {
+            appendOperation(' - ');
+        }
+        if (keyCode == 110) {
+            appendOperation('.');
+        }
+        if (keyCode == 188) {
+            appendOperation('.');
+        }
+        if (keyCode == 13) {
+            calculateResult();
+        }
+        if (event.shiftKey && event.keyCode == 56) {
+            deleteLast();
+            appendOperation(' ( ');
+        }
+        if (event.shiftKey && event.keyCode == 57) {
+            deleteLast();
+            appendOperation(' ) ');
+        }
+
+        //Alle Zahlen nur für das Nummpad!
+        if (keyCode == 96) {
+            appendOperation(0);
+        }
+        if (keyCode == 97) {
+            appendOperation(1);
+        }
+        if (keyCode == 98) {
+            appendOperation(2);
+        }
+        if (keyCode == 99) {
+            appendOperation(3);
+        }
+        if (keyCode == 100) {
+            appendOperation(4);
+        }
+        if (keyCode == 101) {
+            appendOperation(5);
+        }
+        if (keyCode == 102) {
+            appendOperation(6);
+        }
+        if (keyCode == 103) {
+            appendOperation(7);
+        }
+        if (keyCode == 104) {
+            appendOperation(8);
+        }
+        if (keyCode == 105) {
+            appendOperation(9);
+        }
+        ;
+    };
+</script>
+</body>
 
 </html>

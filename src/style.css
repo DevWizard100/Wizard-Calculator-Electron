@@ -18,7 +18,7 @@ body {
 
 table {
     width: 100%;
-    height: 65vh;
+    height: 64.5vh;
     color: white;
     background-color: #121216;
     user-select: none;
@@ -33,6 +33,31 @@ td {
     background-color: #23232D;
     font-size: 24px;
     border-radius: 15px;
+}
+
+.ErweiterteFunktionen {
+    color: white;
+}
+
+@media screen and (min-width: 338px){
+    td {
+        width: 20% ;
+    }
+}
+
+@media screen and (max-width: 338px) {
+    .ErweiterteFunktionen {
+        display: none;
+    }
+
+.Minimizebtn {
+        display: none;
+    }
+}
+@media screen and (min-width: 338px) {
+    .Extendbtn {
+        display: none;
+    }
 }
 
 td:hover {
@@ -50,7 +75,7 @@ td:active {
     transition: 0.01ms;
 }
 #resultArea {
-    height: 18.5vh;
+    height: 18.7vh;
     background-color: var(--resultarea-primary);
     color: white;
     font-size: 45px;

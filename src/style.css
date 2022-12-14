@@ -15,7 +15,6 @@ body {
 }
 
 
-
 table {
     width: 100%;
     height: 64.5vh;
@@ -26,22 +25,45 @@ table {
 }
 
 
-
 td {
     width: 25%;
     text-align: center;
     background-color: #23232D;
     font-size: 24px;
     border-radius: 15px;
+
+    box-sizing: border-box;
+    border-style: solid;
+    border-width: 0.1px;
+    border-color: transparent;
+}
+
+td:hover {
+    cursor: pointer;
+    transition: ease-in-out 200ms;
+    overflow: auto;
+    background-color: #32323d;
+}
+
+td:active {
+    transition: 350ms;
+    box-sizing: border-box;
+    border-style: solid;
+    border-width: 0.1pt;
+    border-color: white;
+}
+
+.highlightnumbers {
+    background-color: #2c2c36;
 }
 
 .ErweiterteFunktionen {
     color: white;
 }
 
-@media screen and (min-width: 338px){
+@media screen and (min-width: 338px) {
     td {
-        width: 20% ;
+        width: 20%;
     }
 }
 
@@ -50,35 +72,22 @@ td {
         display: none;
     }
 
-.Minimizebtn {
+    .Minimizebtn {
         display: none;
     }
 }
+
 @media screen and (min-width: 338px) {
     .Extendbtn {
         display: none;
     }
 }
 
-td:hover {
-    background-color: #343441;
-    cursor: pointer;
-    transition: ease-in-out 200ms;
-    overflow: auto;
-
-}
-
-
-
-td:active {
-    background-color: #48485c ;
-    transition: 0.01ms;
-}
 #resultArea {
     height: 18.7vh;
     background-color: var(--resultarea-primary);
     color: white;
-    font-size: 45px;
+    font-size: 42px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -88,9 +97,9 @@ td:active {
     overflow: hidden;
 }
 
-.QuickResultAreaStyle{
+.QuickResultAreaStyle {
     height: 19.5vh;
-    
+
     box-sizing: border-box;
     width: 100%;
     height: 69vh;
@@ -106,6 +115,7 @@ td:active {
 
 #result {
     background-image: linear-gradient(to right top, #181f6e, #7d1276, #c40465, #f14243, #ff8400);
+    border: none;
 }
 
 #result:hover {
@@ -177,7 +187,6 @@ body {
 }
 
 
-
 .sidenav a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
@@ -208,14 +217,14 @@ body {
 #myProgress {
     width: 100%;
     background-color: var(--resultarea-primary);
-  }
+}
 
-  #myBar {
+#myBar {
     width: 1%;
     height: 1vh;
     background-image: linear-gradient(to right, #1a2175, #83147a, #c91267, #f44b46, #ff8c12);
     transition: 200ms;
-  }
+}
 
 
 @media screen and (max-height: 450px) {
@@ -226,4 +235,91 @@ body {
     .sidenav a {
         font-size: 18px;
     }
+}
+
+
+#MessageBox {
+    background-color: #23232D;
+    position: absolute;
+    top: 12%;
+    color: white;
+    right: 10px;
+    transition: ease-in-out 200ms;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding: 10px;
+    border-radius: 15px;
+    display: none;
+}
+
+
+.Minimizebtn {
+    position: absolute;
+    right: 10px;
+    background-color: #22222b;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    cursor: pointer;
+    transition: ease-in-out 100ms;
+}
+
+.Minimizebtn:hover {
+    background-color: #2e2e3a;
+}
+
+.Extendbtn {
+    position: absolute;
+    right: 10px;
+    background-color: #22222b;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    cursor: pointer;
+    transition: ease-in-out 100ms;
+}
+
+.Extendbtn:hover {
+    background-color: #2e2e3a;
+}
+
+#QuickResultAreaStyle {
+
+    background-color: var(--resultarea-primary);
+    width: 100%;
+}
+
+#QuickResultArea {
+    height: 7.3vh;
+    color: white;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    background-color: #191922;
+    border-radius: 15px;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.ResultInfo {
+    position: absolute;
+    left: 12px;
+    font-size: 17px;
+    user-select: none;
+}
+
+#QuickResult {
+    position: absolute;
+    right: 24px;
+    font-size: 17px;
+    cursor: progress;
+}
+
+#QuickResult:hover {
+    color: rgba(255, 255, 255, 0.623);
 }

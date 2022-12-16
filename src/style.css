@@ -323,3 +323,10 @@ body {
 #QuickResult:hover {
     color: rgba(255, 255, 255, 0.623);
 }
+
+.gradiant-Clearbtn {
+    background-image: linear-gradient(to right top, #252b6b, #7d2e79, #c4346e, #f2594f, #ff9421);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}

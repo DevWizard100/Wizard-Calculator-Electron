@@ -99,32 +99,32 @@
             container.innerHTML = calcsecondexponent;
         }
 
-        if(container.innerHTML.includes("√"))
-        {
+        if (container.innerHTML.includes("√")) {
             let container = document.getElementById('resultArea');
             let delsqrt = document.getElementById("resultArea").innerHTML.replace("√", "");
             let result = Math.sqrt(delsqrt, 2)
             container.innerHTML = result;
-        }
-        else
-        {
+        } else {
             let result = eval(container.innerHTML);
             container.innerHTML = result;
         }
-
-
 
         document.getElementById("QuickResult").innerHTML = "";
 
         if (window.innerWidth < 400 && window.innerHeight < 558) {
             roundresult();
 
-
         } else {
             // Fenster ist kleiner oder gleich 800 Pixel breit und 600 Pixel hoch
         }
-
         DisableCopyMessage();
+    }
+
+    function testsqrt() {
+        // Berechnet die Wurzel 3 von 64
+        let wurzel = Math.pow(64, 1/3);
+        // Gibt das Ergebnis auf der Konsole aus
+        console.log(wurzel);
     }
 
     function changetasksize() {
@@ -168,30 +168,28 @@
             container.innerHTML = calcsecondexponent;
         }
 
-        try {
-            let result = eval(container.innerHTML);
-            container.innerHTML = result;
-        } catch {
-            container.innerHTML = "";
+        if (container.innerHTML.includes("√")) {
+            let container = document.getElementById('QuickResult');
+            let delsqrt = document.getElementById("QuickResult").innerHTML.replace("√", "");
+            let resultsqrt = Math.sqrt(delsqrt, 2)
+            container.innerHTML = resultsqrt;
+        } else {
+            try {
+                let result = eval(container.innerHTML);
+                container.innerHTML = result;
+            } catch {
+                container.innerHTML = "";
+            }
         }
-    }
 
-    function root2() {
-        let container = document.getElementById('resultArea');
-        let result = Math.pow(container.innerHTML, 2)
-        container.innerHTML = result
+        calc();
+
     }
 
     function roundresult() {
         let container = document.getElementById('resultArea');
         let result = Math.round(container.innerHTML * 100) / 100;
         container.innerHTML = result
-    }
-
-    function calculateroot() {
-        let container = document.getElementById('resultArea');
-        let result = Math.sqrt(container.innerHTML)
-        container.innerHTML = result;
     }
 
     function deleteLast() {
@@ -201,16 +199,23 @@
         } else
             container.innerHTML = container.innerHTML.slice(0, -1);
 
+
         while (container.innerHTML == "") {
             container.innerHTML = "0";
         }
 
-        changetasksize();
-
         let QuickResult = document.getElementById("QuickResult")
         QuickResult.innerHTML = container.innerText;
+
+        changetasksize();
         calculateQuickResult();
         DisableCopyMessage();
+
+        //Schnellergebnis Feld leeren
+        if (document.getElementById("QuickResult").innerText.length < 2) {
+            document.getElementById("QuickResult").innerHTML = "";
+        }
+
     }
 
     function deleteall() {
@@ -232,6 +237,7 @@
     function MinimizeWindowSize() {
         window.resizeTo(328, 558)
     }
+
 
 </script>
 </head>
@@ -324,7 +330,6 @@
     <a onclick="notify3(), closeNav()" href="#">Start</a>
     <a href="Services2.html">Services</a>
     <a href="Settings.html">Settings</a>
-
 </div>
 
 

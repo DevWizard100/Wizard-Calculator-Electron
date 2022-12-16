@@ -18,7 +18,7 @@ const createWindow = () => {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       transparent: true,
-      icon: path.join(__dirname, 'icon.png'),
+      icon: path.join(__dirname, 'icon/icon.png'),
       backgroundColor: '#312450',
     },
   });

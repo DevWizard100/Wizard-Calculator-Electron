@@ -51,7 +51,7 @@
         let QuickResult = document.getElementById("QuickResult")
         QuickResult.innerHTML = container.innerText;
 
-        calculateQuickResult();
+        calculateResult();
         changetasksize();
         DisableCopyMessage();
     }
@@ -68,68 +68,8 @@
         let QuickResult = document.getElementById("QuickResult")
         QuickResult.innerHTML = container.innerText;
 
-        calculateQuickResult();
+        calculateResult();
     }
-
-    function calculateResult() {
-        let container = document.getElementById('resultArea');
-
-        while (container.innerHTML.includes("^")) {
-            let containerresult = container.innerText.replace("^", "**");
-            container.innerHTML = containerresult;
-        }
-
-        while (container.innerHTML.includes("×")) {
-            let calculatemulti = container.innerText.replace("×", "*")
-            container.innerHTML = calculatemulti;
-        }
-
-        while (container.innerHTML.includes("π")) {
-            let calculatepi = container.innerText.replace("π", "3.1415926535897932384626433832795");
-            container.innerHTML = calculatepi;
-        }
-
-        while (container.innerHTML.includes("%")) {
-            let calculateprocent = container.innerText.replace("%", "/100");
-            container.innerHTML = calculateprocent;
-        }
-
-        while (container.innerHTML.includes("²")) {
-            let calcsecondexponent = container.innerText.replace("²", "**2");
-            container.innerHTML = calcsecondexponent;
-        }
-
-        if (container.innerHTML.includes("x√")) {
-            let delRoot = document.getElementById("resultArea").innerHTML.split("x√");
-            let sqrtzahl1 = delRoot[0];
-            let sqrtzahl2 = delRoot[1];
-
-            let wurzel = Math.pow(sqrtzahl2, 1 / sqrtzahl1)
-
-            container.innerHTML = wurzel;
-        } else if (container.innerHTML.includes("√")) {
-            let container = document.getElementById('resultArea');
-            let delsqrt = document.getElementById("resultArea").innerHTML.replace("√", "");
-            let result = Math.sqrt(delsqrt, 2)
-            container.innerHTML = result;
-        } else {
-            let result = eval(container.innerHTML);
-            container.innerHTML = result;
-        }
-
-        document.getElementById("QuickResult").innerHTML = "";
-
-        if (window.innerWidth < 400 && window.innerHeight < 558) {
-            roundresult();
-
-        } else {
-            // Fenster ist kleiner oder gleich 800 Pixel breit und 600 Pixel hoch
-        }
-        DisableCopyMessage();
-    }
-
-
-    testsqrt()
 
     function changetasksize() {
         if (window.innerWidth < 400 && window.innerHeight < 558) {
@@ -143,14 +83,23 @@
         }
     }
 
-    function testsqrt() {
-        // Berechnet die Wurzel 3 von 64
-        let wurzel = Math.pow(9, 1 / 3);
-        // Gibt das Ergebnis auf der Konsole aus
-        console.log(wurzel);
+    function ShowResult() {
+
+        if (document.getElementById("QuickResult").innerHTML == "") {
+        } else {
+            document.getElementById("resultArea").innerHTML = document.getElementById("QuickResult").innerHTML;
+            document.getElementById("QuickResult").innerHTML = "";
+        }
+
+        if (window.innerWidth < 400 && window.innerHeight < 558) {
+            roundresult();
+        } else {
+            // Fenster ist kleiner oder gleich 800 Pixel breit und 600 Pixel hoch
+        }
+        DisableCopyMessage();
     }
 
-    function calculateQuickResult() {
+    function calculateResult() {
 
         let container = document.getElementById('QuickResult');
 
@@ -179,6 +128,16 @@
             container.innerHTML = calcsecondexponent;
         }
 
+        while (container.innerHTML.includes("³√")) {
+            let sqrt3 = container.innerText.replace("³", "3x")
+            container.innerHTML = sqrt3;
+        }
+
+        while (container.innerHTML.includes("³")) {
+            let calcsecondexponent = container.innerText.replace("³", "**3");
+            container.innerHTML = calcsecondexponent;
+        }
+
         if (container.innerHTML.includes("x√")) {
             let delRoot = document.getElementById("QuickResult").innerHTML.split("x√");
             let sqrtzahl1 = delRoot[0];
@@ -192,9 +151,11 @@
             container.innerHTML = wurzelresult;
 
         } else if (container.innerHTML.includes("√")) {
+            let container = document.getElementById('QuickResult');
             let delsqrt = document.getElementById("QuickResult").innerHTML.replace("√", "");
-            let resultsqrt = Math.sqrt(delsqrt, 2)
-            container.innerHTML = resultsqrt;
+            let sqrtresult = eval(delsqrt);
+            let result = Math.sqrt(sqrtresult, 2)
+            container.innerHTML = result;
         } else {
             try {
                 let result = eval(container.innerHTML);
@@ -203,15 +164,17 @@
                 container.innerHTML = "";
             }
         }
-
-        calc();
-
     }
 
     function roundresult() {
         let container = document.getElementById('resultArea');
-        let result = Math.round(container.innerHTML * 100) / 100;
-        container.innerHTML = result
+
+        try {
+            let result = Math.round(container.innerHTML * 100) / 100;
+            container.innerHTML = result
+        } catch {
+            window.alert("The task could not be calculated");
+        }
     }
 
     function deleteLast() {
@@ -230,7 +193,7 @@
         QuickResult.innerHTML = container.innerText;
 
         changetasksize();
-        calculateQuickResult();
+        calculateResult();
         DisableCopyMessage();
 
         //Schnellergebnis Feld leeren
@@ -258,6 +221,39 @@
 
     function MinimizeWindowSize() {
         window.resizeTo(328, 558)
+    }
+
+    function ShiftToggle() {
+        let t = document.getElementById("ShiftButton");
+        if (t.value == "YES") {
+            t.value = "NO";
+            document.getElementById("x3").style.display = "table-cell";
+            document.getElementById("x2").style.display = "none";
+            document.getElementById("sqrtnormal").innerHTML = "³√";
+            document.getElementById("ShiftButton").style.backgroundColor = "#22222b";
+            document.getElementById("ShiftButton").style.color = "lightgray";
+            document.getElementById("ShiftButton").style.cursor = "default";
+
+        } else if (t.value == "NO") {
+            t.value = "YES";
+            document.getElementById("x3").style.display = "none";
+            document.getElementById("x2").style.display = "table-cell";
+            document.getElementById("sqrtnormal").innerHTML = "x√";
+            document.getElementById("ShiftButton").style.backgroundColor = "transparent";
+            document.getElementById("ShiftButton").style.color = "white";
+            document.getElementById("ShiftButton").style.cursor = "pointer";
+        }
+    }
+
+    //Entweder x√ als Quadratwurzel oder ³√ als Quadratwurzel hinzufügen abhängig davon ob Shift aktiv ist oder nicht
+    function appendSqrt() {
+        let t = document.getElementById("ShiftButton");
+        if (t.value == "YES") {
+            document.getElementById("resultArea").innerHTML += "x√";
+        } else if (t.value == "NO") {
+            document.getElementById("resultArea").innerHTML = "";
+            document.getElementById("resultArea").innerHTML += "³√";
+        }
     }
 
 
@@ -292,20 +288,42 @@
 
 <div id="QuickResultAreaStyle">
     <div id="QuickResultArea">
-        <span class="ResultInfo">Result</span> <span onclick="ShowCopyMessage()" id="QuickResult"></span>
+        <span style="display: none" class="ResultInfo">Result</span>
+        <button id="ShiftButton" value="YES" onclick="ShiftToggle();">Function</button>
+        <span onclick="ShowCopyMessage()" id="QuickResult"></span>
     </div>
 </div>
 
+<style>
+    #ShiftButton {
+        position: absolute;
+
+        background-color: transparent;
+        border: none;
+        color: white;
+        border-radius: 4px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        cursor: pointer;
+        transition: ease-in-out 100ms;
+
+
+        left: 12px;
+        font-size: 17px;
+        user-select: none;
+    }
+</style>
+
 <table>
     <tr>
-        <td onclick="appendOperation('²')">x²</td>
+        <td id="x2" onclick="appendOperation('²')">x²</td>
+        <td style="display: none" id="x3" onclick="appendOperation('³')">x³</td>
         <td id="root1" onclick="appendOperation('√')">√</td>
-        <td onclick="deleteall()"><span class="gradiant-Clearbtn">C</span></td>
+        <td onclick="deleteall()"><span style="text-decoration: underline">C</span></td>
         <td onclick="deleteLast()"><span style="display: flex; justify-content: center; font-size: 22px;"
                                          class="material-icons">
                     backspace
                 </span></td>
-
     </tr>
     <tr>
         <td onclick="appendOperation(' ( ')">(</td>
@@ -319,7 +337,8 @@
         <td class="highlightnumbers" onclick="appendOperation(8)">8</td>
         <td class="highlightnumbers" onclick="appendOperation(9)">9</td>
         <td onclick="appendOperation(' × ')" class="highlight">x</td>
-        <td class="ErweiterteFunktionen" onclick="appendOperation('x√')">x√</td>
+        <td id="sqrtnormal" class="ErweiterteFunktionen" onclick="appendSqrt()">x√</td>
+        <td style="display: none" id="sqrt3" class="ErweiterteFunktionen" onclick="appendOperation('³√')">³√</td>
     </tr>
 
     <tr>
@@ -342,7 +361,7 @@
     <tr>
         <td class="highlight" colspan="2" onclick="appendOperation(0)">0</td>
         <td onclick="appendOperation('.')">.</td>
-        <td onclick="calculateResult()" id="result">=</td>
+        <td onclick="ShowResult();" id="result">=</td>
     </tr>
 </table>
 

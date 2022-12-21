@@ -11,7 +11,7 @@
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
-    background-color: var(--resultarea-primary);
+    background-color: #121216;
 }
 
 
@@ -31,7 +31,6 @@ td {
     background-color: #23232D;
     font-size: 24px;
     border-radius: 15px;
-
     box-sizing: border-box;
     border-style: solid;
     border-width: 0.1px;
@@ -181,11 +180,15 @@ body {
     background-color: var(--resultarea-primary);
     overflow-x: hidden;
     transition: 150ms;
-    padding-top: 60px;
+
     border-top-right-radius: 15px;
     box-shadow: 1px 0px rgb(39, 39, 39);
+    border-bottom-right-radius: 15px;
 }
 
+.navlink {
+    margin-top: 52px;
+}
 
 .sidenav a {
     padding: 8px 8px 8px 32px;
@@ -265,6 +268,7 @@ body {
     padding-bottom: 5px;
     cursor: pointer;
     transition: ease-in-out 100ms;
+    user-select: none;
 }
 
 .Minimizebtn:hover {
@@ -282,6 +286,7 @@ body {
     padding-bottom: 5px;
     cursor: pointer;
     transition: ease-in-out 100ms;
+    user-select: none;
 }
 
 .Extendbtn:hover {
@@ -329,4 +334,22 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: bold;
+}
+
+    #ShiftButton {
+    position: absolute;
+
+    background-color: transparent;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    cursor: pointer;
+    transition: ease-in-out 100ms;
+
+
+    left: 12px;
+    font-size: 17px;
+    user-select: none;
 }

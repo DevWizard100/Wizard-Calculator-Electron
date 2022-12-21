@@ -9,29 +9,13 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\"",
-    "build-installer": "electron-builder"
-  },
-  "build": {
-    "appId": "wizard-calculator",
-    "win": {
-      "target": [
-        "nsis"
-      ],
-      "icon": "src/icon.jpg",
-      "requestedExecutionLevel": "requireAdministrator"
-    },
-    "nsis": {
-      "installerIcon": "src/icon.jpg",
-      "uninstallerIcon": "src/icon.jpg",
-      "uninstallDisplayName": "CPU Monitor",
-      "license": "license.txt",
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true
-    }
+    "lint": "echo \"No linting configured\""
   },
   "keywords": [],
-  "author": "Wizardgamer100",
+  "author": {
+    "name": "Wizardgamer100",
+    "email": "felixschalk04@outlook.com"
+  },
   "license": "MIT",
   "config": {
     "forge": {
@@ -61,16 +45,14 @@
     }
   },
   "dependencies": {
-    "electron-builder": "^23.1.0",
-    "electron-squirrel-startup": "^1.0.0",
-    "electron-view-renderer": "^1.2.5"
+    "electron-squirrel-startup": "^1.0.0"
   },
   "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.64",
-    "@electron-forge/maker-deb": "^6.0.0-beta.64",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.64",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.64",
-    "@electron-forge/maker-zip": "^6.0.0-beta.64",
-    "electron": "^19.0.9"
+    "@electron-forge/cli": "^6.0.4",
+    "@electron-forge/maker-deb": "^6.0.4",
+    "@electron-forge/maker-rpm": "^6.0.4",
+    "@electron-forge/maker-squirrel": "^6.0.4",
+    "@electron-forge/maker-zip": "^6.0.4",
+    "electron": "22.0.0"
   }
 }

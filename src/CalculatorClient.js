@@ -2,7 +2,7 @@
 function ShowCopyMessage() {
     document.getElementById("MessageBox").style.display = "block";
 
-    setTimeout(DisableCopyMessage, 3000);
+    setTimeout(DisableCopyMessage, 2500);
 
     // Erstellen Sie ein textarea-Element
     let textarea = document.createElement("textarea");

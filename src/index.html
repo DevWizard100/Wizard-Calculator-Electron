@@ -86,6 +86,7 @@
     function ShowResult() {
 
         if (document.getElementById("QuickResult").innerHTML == "") {
+            document.getElementById("errorpopup").style.display = "block";
         } else {
             document.getElementById("resultArea").innerHTML = document.getElementById("QuickResult").innerHTML;
             document.getElementById("QuickResult").innerHTML = "";
@@ -345,14 +346,94 @@
 </table>
 
 
-<body>
-
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a class="navlink" onclick="notify3(), closeNav()" href="#">Start</a>
     <a href="Services2.html">Services</a>
     <a href="Settings.html">Settings</a>
 </div>
+
+
+<div id="errorpopup" class="popup">
+    <h3>Math Error</h3>
+    <p>the calculation is not solvable</p>
+    <button id="close-popup">OK</button>
+</div>
+
+<script>
+    // Get popup element and close button
+    let popup = document.querySelector('.popup');
+    let closeButton = document.querySelector('#close-popup');
+
+    // Close popup when close button is clicked
+    closeButton.onclick = function () {
+        popup.style.display = 'none';
+    };
+</script>
+
+
+<div id="contextMenu">
+<a onclick="deleteall();" href="#">Clear</a>
+    <a onclick="ShowCopyMessage();" href="#">Copy Result</a>
+    <a onclick="window.close();" href="#">Exit</a>
+</div>
+
+<style>
+    #contextMenu {
+        display: none;
+        position: absolute;
+        z-index: 1;
+        background-color: #23232D;
+        border-radius: 15px;
+        color: white;
+        box-shadow: 0 0 15px black;
+        overflow: hidden;
+
+    }
+
+    #contextMenu a {
+        color: white;
+        padding: 10px 14px;
+        text-decoration: none;
+        display: block;
+        font-size: 15px;
+    transition: ease-in-out 100ms;
+    }
+
+    #contextMenu a:hover {
+        background-color: #42424C;
+    }
+
+</style>
+
+<script>
+    const contextMenu = document.getElementById("contextMenu");
+
+    document.addEventListener("contextmenu", e => {
+        e.preventDefault();
+        contextMenu.style.left = e.clientX + "px";
+        contextMenu.style.top = e.clientY + "px";
+        contextMenu.style.display = "block";
+    });
+
+    document.addEventListener("click", e => {
+        contextMenu.style.display = "none";
+    });
+
+</script>
+
+<script>
+function setMousePointerToProgress() {
+    document.body.style.cursor = 'progress';
+    setTimeout(() => {
+        document.body.style.cursor = '';
+    }, 3000);
+}
+
+
+setMousePointerToProgress();
+
+</script>
 
 </body>
 

@@ -336,7 +336,7 @@ body {
     font-weight: bold;
 }
 
-    #ShiftButton {
+#ShiftButton {
     position: absolute;
 
     background-color: transparent;
@@ -352,4 +352,37 @@ body {
     left: 12px;
     font-size: 17px;
     user-select: none;
+}
+
+/* Style popup dialog */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    padding: 15px;
+    border-radius: 15px;
+    background-color: #121216;
+    width: 60%;
+    box-shadow: 0 0 15px #121216;
+    display: none;
+    transition: display 200ms;
+}
+
+#close-popup {
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(to right top, #252b6b, #7d2e79, #c4346e, #f2594f, #ff9421);
+    border: 0px;
+    border-radius: 7px;
+    color: white;
+
+    padding: 3px 11px 3px 11px;
+    cursor: pointer;
+    transition: ease-in-out 200ms;
+}
+
+#close-popup:hover {
+    background-image: linear-gradient(to right, #252b6b, #7d2e79, #c4346e, #f2594f, #ff9421);
 }

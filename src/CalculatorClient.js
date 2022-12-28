@@ -120,6 +120,33 @@ function move() {
 move()
 
 
+//Lade Kreis an der Maus beim starten der App
+function setMousePointerToProgress() {
+    document.body.style.cursor = 'progress';
+    setTimeout(() => {
+        document.body.style.cursor = '';
+    }, 3000);
+}
+
+setMousePointerToProgress();
+
+//Rechtsklick context menü
+const contextMenu = document.getElementById("contextMenu");
+
+document.addEventListener("contextmenu", e => {
+    e.preventDefault();
+    contextMenu.style.left = e.clientX + "px";
+    contextMenu.style.top = e.clientY + "px";
+    contextMenu.style.display = "block";
+});
+
+document.addEventListener("click", e => {
+    contextMenu.style.display = "none";
+});
+
+
+
+
 // Alle Keybinds für die Tastatur!
 document.onkeydown = function (e) {
     let keyCode = e.keyCode;
@@ -224,4 +251,28 @@ document.onkeydown = function (e) {
 };
 
 
+// Speichere die aktuelle Fenstergröße im local storage
+    function saveWindowSize() {
+        const width = window.outerWidth;
+        const height = window.outerHeight;
+        localStorage.setItem('windowSize', JSON.stringify({ width, height }));
+    }
 
+    // Lade die Fenstergröße aus dem local storage
+    function loadWindowSize() {
+        const size = JSON.parse(localStorage.getItem('windowSize'));
+        if (size) {
+            window.resizeTo(size.width, size.height);
+        }
+    else
+    {
+        window.resizeTo(328, 558);
+    }
+    }
+
+
+    // Speichere die Fenstergröße, wenn sich die Fenstergröße ändert
+    window.addEventListener('resize', saveWindowSize);
+
+    // Lade die Fenstergröße beim Laden der Seite
+    window.addEventListener('load', loadWindowSize);

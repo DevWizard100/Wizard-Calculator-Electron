@@ -3,6 +3,7 @@ const { read } = require('fs');
 const { win32 } = require('path');
 const path = require('path');
 
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 // eslint-disable-next-line global-require
 if (require('electron-squirrel-startup')) {
@@ -19,12 +20,25 @@ const createWindow = () => {
       preload: path.join(__dirname, 'preload.js'),
       transparent: true,
       icon: path.join(__dirname, 'icon/icon.png'),
-      backgroundColor: '#312450',
+      backgroundColor: 'black',
     },
   });
 
 
   
+
+
+
+
+
+
+
+
+
+
+
+
+
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
   mainWindow.setBackgroundColor('#56cc5b10') // turns opaque brown

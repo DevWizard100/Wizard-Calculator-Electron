@@ -109,7 +109,7 @@ td:active {
 }
 
 #resultArea:hover {
-    color: rgba(255, 255, 255, 0.623);
+
 }
 
 #result {
@@ -354,35 +354,28 @@ body {
     user-select: none;
 }
 
-/* Style popup dialog */
-.popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    padding: 15px;
-    border-radius: 15px;
-    background-color: #121216;
-    width: 60%;
-    box-shadow: 0 0 15px #121216;
+
+#contextMenu {
     display: none;
-    transition: display 200ms;
-}
-
-#close-popup {
-    display: flex;
-    justify-content: center;
-    background: linear-gradient(to right top, #252b6b, #7d2e79, #c4346e, #f2594f, #ff9421);
-    border: 0px;
-    border-radius: 7px;
+    position: absolute;
+    z-index: 1;
+    background-color: #23232D;
+    border-radius: 15px;
     color: white;
+    box-shadow: 0 0 15px black;
+    overflow: hidden;
 
-    padding: 3px 11px 3px 11px;
-    cursor: pointer;
-    transition: ease-in-out 200ms;
 }
 
-#close-popup:hover {
-    background-image: linear-gradient(to right, #252b6b, #7d2e79, #c4346e, #f2594f, #ff9421);
+#contextMenu a {
+    color: white;
+    padding: 10px 14px;
+    text-decoration: none;
+    display: block;
+    font-size: 15px;
+    transition: ease-in-out 100ms;
+}
+
+#contextMenu a:hover {
+    background-color: #42424C;
 }

@@ -1,0 +1,9 @@
+{
+    "configurations": [
+        {
+            "name": "Run Electron App",
+            "type": "command",
+            "program": "run.bat",
+        }
+    ]
+}

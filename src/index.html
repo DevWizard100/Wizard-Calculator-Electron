@@ -359,8 +359,40 @@
     <a onclick="deleteall();" href="#">Clear</a>
     <a onclick="ShowCopyMessage();" href="#">Copy Result</a>
     <a onclick="window.close();" href="#">Exit</a>
+    <a onclick="loadWindowPosition()" href="#">Re. Win. Pos.</a>
 </div>
 
+<script>
+import * as node
+
+function windowpositionchange() {
+    saveWindowPosition()
+}
+
+
+// Speichere die aktuelle Fensterposition im local storage
+function saveWindowPosition() {
+    const x = window.screenX;
+    const y = window.screenY;
+    localStorage.setItem('windowPosition', JSON.stringify({ x, y }));
+}
+
+// Lade die Fensterposition aus dem local storage
+function loadWindowPosition() {
+    const pos = JSON.parse(localStorage.getItem('windowPosition'));
+    if (pos) {
+        window.moveTo(pos.x, pos.y);
+    }
+
+    saveWindowPosition()
+}
+
+// Speichere die Fensterposition, wenn sich die Fensterposition ändert
+window.addEventListener('click', saveWindowPosition);
+
+// Lade die Fensterposition beim Laden der Seite
+//window.addEventListener('load', loadWindowPosition);
+</script>
 </body>
 
 </html>

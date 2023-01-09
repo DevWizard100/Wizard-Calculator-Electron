@@ -1,0 +1,16 @@
+{
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico",
+      "publisherName": "My Company",
+      "nsis": {
+        "oneClick": false,
+        "perMachine": true,
+        "allowToChangeInstallationDirectory": true
+      }
+    }
+  }
+  

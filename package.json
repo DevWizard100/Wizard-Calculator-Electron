@@ -13,8 +13,7 @@
   },
   "keywords": [],
   "author": {
-    "name": "Wizardgamer100",
-    "email": "felixschalk04@outlook.com"
+    "name": "Wizardgamer100"
   },
   "license": "MIT",
   "config": {
@@ -46,6 +45,7 @@
   },
   "dependencies": {
     "custom-electron-titlebar": "^4.1.5",
+    "electron-builder": "^23.6.0",
     "electron-squirrel-startup": "^1.0.0"
   },
   "devDependencies": {

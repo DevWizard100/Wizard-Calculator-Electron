@@ -157,6 +157,22 @@
             let sqrtresult = eval(delsqrt);
             let result = Math.sqrt(sqrtresult, 2)
             container.innerHTML = result;
+        } else if (container.innerHTML.includes("log")) {
+            while (container.innerHTML.includes("log"))
+            {
+                let dellogtext = container.innerHTML.replace("log", "");
+                container.innerHTML = (dellogtext);
+
+            }
+
+
+            let SplitLogTask = container.innerHTML.split("/");
+            let LogNumber1 = SplitLogTask[0];
+            let LogNumber2 = SplitLogTask[1];
+
+            let logresult = (Math.log(LogNumber1) / Math.log(LogNumber2));
+
+            container.innerHTML = logresult;
         } else {
             try {
                 let result = eval(container.innerHTML);
@@ -343,6 +359,7 @@
         <td class="highlight" colspan="2" onclick="appendOperation(0)">0</td>
         <td onclick="appendOperation('.')">.</td>
         <td onclick="ShowResult();" id="result">=</td>
+        <td class="ErweiterteFunktionen" onclick="appendOperation('log ')">log</td>
     </tr>
 </table>
 
@@ -363,35 +380,35 @@
 </div>
 
 <script>
-import * as node
+    import * as node
 
-function windowpositionchange() {
-    saveWindowPosition()
-}
-
-
-// Speichere die aktuelle Fensterposition im local storage
-function saveWindowPosition() {
-    const x = window.screenX;
-    const y = window.screenY;
-    localStorage.setItem('windowPosition', JSON.stringify({ x, y }));
-}
-
-// Lade die Fensterposition aus dem local storage
-function loadWindowPosition() {
-    const pos = JSON.parse(localStorage.getItem('windowPosition'));
-    if (pos) {
-        window.moveTo(pos.x, pos.y);
+    function windowpositionchange() {
+        saveWindowPosition()
     }
 
-    saveWindowPosition()
-}
 
-// Speichere die Fensterposition, wenn sich die Fensterposition ändert
-window.addEventListener('click', saveWindowPosition);
+    // Speichere die aktuelle Fensterposition im local storage
+    function saveWindowPosition() {
+        const x = window.screenX;
+        const y = window.screenY;
+        localStorage.setItem('windowPosition', JSON.stringify({x, y}));
+    }
 
-// Lade die Fensterposition beim Laden der Seite
-//window.addEventListener('load', loadWindowPosition);
+    // Lade die Fensterposition aus dem local storage
+    function loadWindowPosition() {
+        const pos = JSON.parse(localStorage.getItem('windowPosition'));
+        if (pos) {
+            window.moveTo(pos.x, pos.y);
+        }
+
+        saveWindowPosition()
+    }
+
+    // Speichere die Fensterposition, wenn sich die Fensterposition ändert
+    window.addEventListener('click', saveWindowPosition);
+
+    // Lade die Fensterposition beim Laden der Seite
+    //window.addEventListener('load', loadWindowPosition);
 </script>
 </body>
 

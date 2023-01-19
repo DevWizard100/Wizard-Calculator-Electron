@@ -54,6 +54,8 @@
         calculateResult();
         changetasksize();
         DisableCopyMessage();
+
+        document.getElementById("restoretaskbtn").style.display = "none";
     }
 
     function addpi() {
@@ -84,6 +86,7 @@
     }
 
     function ShowResult() {
+        savetask();
 
         if (document.getElementById("QuickResult").innerHTML == "") {
             window.alert("The calculation is not solvable!")
@@ -158,8 +161,7 @@
             let result = Math.sqrt(sqrtresult, 2)
             container.innerHTML = result;
         } else if (container.innerHTML.includes("log")) {
-            while (container.innerHTML.includes("log"))
-            {
+            while (container.innerHTML.includes("log")) {
                 let dellogtext = container.innerHTML.replace("log", "");
                 container.innerHTML = (dellogtext);
 
@@ -282,134 +284,142 @@
         <i class="fa fa-bars"></i></button>
     <p class="titlebar1">Standard</p>
 
+    <button id="restoretaskbtn" onclick="restoretask()">Back</button>
+
     <button onclick="ExtendWindowSize()" class="Extendbtn">Extend</button>
     <button onclick="MinimizeWindowSize()" class="Minimizebtn">Minimize</button>
 </div>
 
 
+</div>
+
 <div class="menu2">
-
-</div>
-
-<div id="myProgress">
-    <div id="myBar"></div>
-</div>
-
-
-<div id="resultArea">0</div>
-
-
-<div id="MessageBox">The result was copied!</div>
-
-
-<div id="QuickResultAreaStyle">
-    <div id="QuickResultArea">
-        <span style="display: none" class="ResultInfo">Result</span>
-        <button id="ShiftButton" value="YES" onclick="ShiftToggle();">Function</button>
-        <span onclick="ShowCopyMessage()" id="QuickResult"></span>
+    <div id="myProgress">
+        <div id="myBar"></div>
     </div>
-</div>
 
-<table>
-    <tr>
-        <td id="x2" onclick="appendOperation('²')">x²</td>
-        <td style="display: none" id="x3" onclick="appendOperation('³')">x³</td>
-        <td id="root1" onclick="appendOperation('√')">√</td>
-        <td onclick="deleteall()"><span style="text-decoration: underline">C</span></td>
-        <td onclick="deleteLast()"><span style="display: flex; justify-content: center; font-size: 22px;"
-                                         class="material-icons">
+
+    <div id="resultArea">0</div>
+
+
+    <div id="MessageBox">The result was copied!</div>
+
+
+    <div id="QuickResultAreaStyle">
+        <div id="QuickResultArea">
+            <span style="display: none" class="ResultInfo">Result</span>
+            <button id="ShiftButton" value="YES" onclick="ShiftToggle();">Function</button>
+            <span onclick="ShowCopyMessage()" id="QuickResult"></span>
+        </div>
+    </div>
+
+    <table>
+        <tr>
+            <td id="x2" onclick="appendOperation('²')">x²</td>
+            <td style="display: none" id="x3" onclick="appendOperation('³')">x³</td>
+            <td id="root1" onclick="appendOperation('√')">√</td>
+            <td onclick="deleteall()"><span style="text-decoration: underline">C</span></td>
+            <td onclick="deleteLast()"><span style="display: flex; justify-content: center; font-size: 22px;"
+                                             class="material-icons">
                     backspace
                 </span></td>
-    </tr>
-    <tr>
-        <td onclick="appendOperation(' ( ')">(</td>
-        <td onclick="appendOperation(' ) ')">)</td>
-        <td onclick="roundresult()">r</td>
-        <td onclick="appendOperation(' / ')" class="highlight">/</td>
-        <td class="ErweiterteFunktionen" onclick="appendOperation('^')">^</td>
-    </tr>
-    <tr>
-        <td class="highlightnumbers" onclick="appendOperation(7)">7</td>
-        <td class="highlightnumbers" onclick="appendOperation(8)">8</td>
-        <td class="highlightnumbers" onclick="appendOperation(9)">9</td>
-        <td onclick="appendOperation(' × ')" class="highlight">x</td>
-        <td id="sqrtnormal" class="ErweiterteFunktionen" onclick="appendSqrt()">x√</td>
-        <td style="display: none" id="sqrt3" class="ErweiterteFunktionen" onclick="appendOperation('³√')">³√</td>
-    </tr>
+        </tr>
+        <tr>
+            <td onclick="appendOperation(' ( ')">(</td>
+            <td onclick="appendOperation(' ) ')">)</td>
+            <td onclick="roundresult()">r</td>
+            <td onclick="appendOperation(' / ')" class="highlight">/</td>
+            <td class="ErweiterteFunktionen" onclick="appendOperation('^')">^</td>
+        </tr>
+        <tr>
+            <td class="highlightnumbers" onclick="appendOperation(7)">7</td>
+            <td class="highlightnumbers" onclick="appendOperation(8)">8</td>
+            <td class="highlightnumbers" onclick="appendOperation(9)">9</td>
+            <td onclick="appendOperation(' × ')" class="highlight">x</td>
+            <td id="sqrtnormal" class="ErweiterteFunktionen" onclick="appendSqrt()">x√</td>
+            <td style="display: none" id="sqrt3" class="ErweiterteFunktionen" onclick="appendOperation('³√')">³√</td>
+        </tr>
 
-    <tr>
-        <td class="highlightnumbers" onclick="appendOperation(4)">4</td>
-        <td class="highlightnumbers" onclick="appendOperation(5)">5</td>
-        <td class="highlightnumbers" onclick="appendOperation(6)">6</td>
-        <td onclick="appendOperation(' + ')" class="highlight">+</td>
-        <td class="ErweiterteFunktionen" onclick="appendOperation('%')">%</td>
-    </tr>
+        <tr>
+            <td class="highlightnumbers" onclick="appendOperation(4)">4</td>
+            <td class="highlightnumbers" onclick="appendOperation(5)">5</td>
+            <td class="highlightnumbers" onclick="appendOperation(6)">6</td>
+            <td onclick="appendOperation(' + ')" class="highlight">+</td>
+            <td class="ErweiterteFunktionen" onclick="appendOperation('%')">%</td>
+        </tr>
 
-    <tr>
-        <td class="highlightnumbers" onclick="appendOperation(1)">1</td>
-        <td class="highlightnumbers" onclick="appendOperation(2)">2</td>
-        <td class="highlightnumbers" onclick="appendOperation(3)">3</td>
-        <td onclick="appendOperation(' - ')" class="highlight">-</td>
+        <tr>
+            <td class="highlightnumbers" onclick="appendOperation(1)">1</td>
+            <td class="highlightnumbers" onclick="appendOperation(2)">2</td>
+            <td class="highlightnumbers" onclick="appendOperation(3)">3</td>
+            <td onclick="appendOperation(' - ')" class="highlight">-</td>
 
-        <td class="ErweiterteFunktionen" onclick="addpi()">π</td>
-    </tr>
+            <td class="ErweiterteFunktionen" onclick="addpi()">π</td>
+        </tr>
 
-    <tr>
-        <td class="highlight" colspan="2" onclick="appendOperation(0)">0</td>
-        <td onclick="appendOperation('.')">.</td>
-        <td onclick="ShowResult();" id="result">=</td>
-        <td class="ErweiterteFunktionen" onclick="appendOperation('log ')">log</td>
-    </tr>
-</table>
-
-
-<div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a class="navlink" onclick="notify3(), closeNav()" href="#">Start</a>
-    <a href="Services2.html">Services</a>
-    <a href="Settings.html">Settings</a>
-</div>
+        <tr>
+            <td class="highlight" colspan="2" onclick="appendOperation(0)">0</td>
+            <td onclick="appendOperation('.')">.</td>
+            <td onclick="ShowResult();" id="result">=</td>
+            <td class="ErweiterteFunktionen" onclick="appendOperation('log ')">log</td>
+        </tr>
+    </table>
 
 
-<div id="contextMenu">
-    <a onclick="deleteall();" href="#">Clear</a>
-    <a onclick="ShowCopyMessage();" href="#">Copy Result</a>
-    <a onclick="window.close();" href="#">Exit</a>
-    <a onclick="loadWindowPosition()" href="#">Re. Win. Pos.</a>
-</div>
-
-<script>
-    import * as node
-
-    function windowpositionchange() {
-        saveWindowPosition()
-    }
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a class="navlink" onclick="notify3(), closeNav()" href="#">Start</a>
+        <a href="Services2.html">Services</a>
+        <a href="Settings.html">Settings</a>
+    </div>
 
 
-    // Speichere die aktuelle Fensterposition im local storage
-    function saveWindowPosition() {
-        const x = window.screenX;
-        const y = window.screenY;
-        localStorage.setItem('windowPosition', JSON.stringify({x, y}));
-    }
+    <div id="contextMenu">
+        <a onclick="deleteall();" href="#">Clear</a>
+        <a onclick="ShowCopyMessage();" href="#">Copy Result</a>
+        <a onclick="window.close();" href="#">Exit</a>
+        <a onclick="loadWindowPosition()" href="#">Re. Win. Pos.</a>
+    </div>
 
-    // Lade die Fensterposition aus dem local storage
-    function loadWindowPosition() {
-        const pos = JSON.parse(localStorage.getItem('windowPosition'));
-        if (pos) {
-            window.moveTo(pos.x, pos.y);
+    <script>
+        // Speichere die aktuelle Fensterposition im local storage
+        function saveWindowPosition() {
+            const x = window.screenX;
+            const y = window.screenY;
+            localStorage.setItem('windowPosition', JSON.stringify({x, y}));
         }
 
-        saveWindowPosition()
-    }
+        // Lade die Fensterposition aus dem local storage
+        function loadWindowPosition() {
+            const pos = JSON.parse(localStorage.getItem('windowPosition'));
+            if (pos) {
+                window.moveTo(pos.x, pos.y);
+            }
 
-    // Speichere die Fensterposition, wenn sich die Fensterposition ändert
-    window.addEventListener('click', saveWindowPosition);
+            saveWindowPosition()
+        }
 
-    // Lade die Fensterposition beim Laden der Seite
-    //window.addEventListener('load', loadWindowPosition);
-</script>
-</body>
+        // Speichere die Fensterposition, wenn sich die Fensterposition ändert
+        window.addEventListener('click', saveWindowPosition);
 
-</html>
+        // Lade die Fensterposition beim Laden der Seite
+        //window.addEventListener('load', loadWindowPosition);
 
+
+        function savetask() {
+            document.getElementById("restoretaskbtn").style.display = "block";
+            sessionStorage.setItem('divContent', document.getElementById('resultArea').innerHTML);
+        }
+
+        function restoretask() {
+            document.getElementById('resultArea').innerHTML = sessionStorage.getItem('divContent')
+
+            document.getElementById("restoretaskbtn").style.display = "none";
+
+
+            let container = document.getElementById('resultArea');
+            let QuickResult = document.getElementById("QuickResult")
+            QuickResult.innerHTML = container.innerText;
+            calculateResult();
+        }
+    </script>

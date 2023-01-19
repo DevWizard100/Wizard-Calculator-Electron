@@ -15,7 +15,6 @@ body {
 }
 
 
-
 table {
     width: 100%;
     height: 64.5vh;
@@ -379,4 +378,25 @@ body {
 
 #contextMenu a:hover {
     background-color: #42424C;
+}
+
+#restoretaskbtn {
+    position: absolute;
+    margin-top: calc(
+            9.5vh + 47px);
+    margin-left: 7px;
+    display: none;
+    background-color: #191922;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    cursor: pointer;
+    transition: ease-in-out 100ms;
+    user-select: none;
+}
+
+#restoretaskbtn:hover {
+    background-color: #2e2e3a;
 }

@@ -3,6 +3,22 @@
     --resultarea-secondary: white;
 }
 
+
+@font-face {
+    font-family: 'Arial';
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('assets/fonts/Roboto-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Ubuntu";
+    src: url("assets/fonts/Ubuntu-Regular.ttf") format("truetype");
+}
+
+
 .dark_mode {
     --rusultarea-primary: white;
     --resultarea-secondary: #121216;
@@ -165,11 +181,6 @@ td:active {
 }
 
 /* Navigationsleiste design */
-
-body {
-    font-family: "robot", sans-serif;
-}
-
 .sidenav {
     height: 100%;
     width: 0;

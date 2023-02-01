@@ -25,6 +25,7 @@ function ShowCopyMessage() {
 }
 
 
+
 function DisableCopyMessage() {
     document.getElementById("MessageBox").style.display = "none";
 }
@@ -277,3 +278,11 @@ document.onkeydown = function (e) {
 
     // Lade die Fenstergröße beim Laden der Seite
     window.addEventListener('load', loadWindowSize);
+
+    // Beim Seitenaufruf die ausgewählte Schriftart aus dem localStorage laden
+const selectedFont = localStorage.getItem('selectedFont');
+if (selectedFont) {
+    document.body.style.fontFamily = selectedFont;
+    selector.value = selectedFont;
+}
+

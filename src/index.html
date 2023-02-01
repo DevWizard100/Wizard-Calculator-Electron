@@ -147,12 +147,12 @@
             let sqrtzahl1 = delRoot[0];
             let sqrtzahl2 = delRoot[1];
 
-            let wurzel = Math.pow(sqrtzahl2, 1 / sqrtzahl1)
+            let xsqrt = Math.pow(sqrtzahl2, 1 / sqrtzahl1)
 
-            container.innerHTML = wurzel;
+            container.innerHTML = xsqrt;
 
-            let wurzelresult = Math.round(container.innerHTML * 100) / 100;
-            container.innerHTML = wurzelresult;
+            let xsqrtresult = Math.round(container.innerHTML * 100) / 100;
+            container.innerHTML = xsqrtresult;
 
         } else if (container.innerHTML.includes("√")) {
             let container = document.getElementById('QuickResult');
@@ -164,7 +164,6 @@
             while (container.innerHTML.includes("log")) {
                 let dellogtext = container.innerHTML.replace("log", "");
                 container.innerHTML = (dellogtext);
-
             }
 
             let SplitLogTask = container.innerHTML.split("/");
@@ -278,20 +277,20 @@
 </script>
 
 <body>
+<div class="font-change">
 <div class="menu">
 
     <button class="btn" onclick="openNav()">
         <i class="fa fa-bars"></i></button>
     <p class="titlebar1">Standard</p>
 
-    <button id="restoretaskbtn" onclick="restoretask()">Back</button>
+    <button id="restoretaskbtn" onclick="restoretask()">◀</button>
 
     <button onclick="ExtendWindowSize()" class="Extendbtn">Extend</button>
     <button onclick="MinimizeWindowSize()" class="Minimizebtn">Minimize</button>
 </div>
 
 
-</div>
 
 <div class="menu2">
     <div id="myProgress">
@@ -381,7 +380,11 @@
         <a onclick="loadWindowPosition()" href="#">Re. Win. Pos.</a>
     </div>
 
+    </div>
+</body>
+
     <script>
+
         // Speichere die aktuelle Fensterposition im local storage
         function saveWindowPosition() {
             const x = window.screenX;

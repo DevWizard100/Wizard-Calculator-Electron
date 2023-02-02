@@ -280,6 +280,7 @@ td:active {
     cursor: pointer;
     transition: ease-in-out 100ms;
     user-select: none;
+    font-family: 'Roboto', sans-serif;
 }
 
 .Minimizebtn:hover {
@@ -298,7 +299,9 @@ td:active {
     cursor: pointer;
     transition: ease-in-out 100ms;
     user-select: none;
+    font-family: 'Roboto', sans-serif;
 }
+
 
 .Extendbtn:hover {
     background-color: #2e2e3a;
@@ -347,20 +350,18 @@ td:active {
     font-weight: bold;
 }
 
-#ShiftButton {
+.Resultlbl {
     position: absolute;
-
     background-color: transparent;
     border: none;
     color: white;
     border-radius: 4px;
     padding-top: 5px;
     padding-bottom: 5px;
-    cursor: pointer;
+
     transition: ease-in-out 100ms;
 
-
-    left: 12px;
+    left: 14px;
     font-size: 17px;
     user-select: none;
 }

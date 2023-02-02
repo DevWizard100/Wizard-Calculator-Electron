@@ -1,58 +1,50 @@
-const { app, BrowserWindow, autoUpdater, } = require('electron');
-const { read } = require('fs');
-const { win32 } = require('path');
+const { app, BrowserWindow } = require('electron');
 const path = require('path');
+const fs = require('fs');
 
-
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
-// eslint-disable-next-line global-require
-if (require('electron-squirrel-startup')) {
-  app.quit();
-}
+let mainWindow;
 
 const createWindow = () => {
-  // Create the browser window.
-  const mainWindow = new BrowserWindow({
-    width: 328,
-    height: 558,
-    //icon: path.join(__dirname, 'icon.png'),
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
-      transparent: true,
-      icon: path.join(__dirname, 'icon/icon.png'),
-      backgroundColor: 'black',
-    },
+  // Laden der gespeicherten Fenstergröße und -position, falls vorhanden
+  let windowBounds;
+  try {
+    windowBounds = JSON.parse(fs.readFileSync(path.join(__dirname, 'WindowSettings.json')));
+  } catch (err) {
+    console.error(err);
+  }
+
+  // Erstellen des Browserfensters
+  mainWindow = new BrowserWindow({
+    x: windowBounds ? windowBounds.x : undefined,
+    y: windowBounds ? windowBounds.y : undefined,
+    width: windowBounds ? windowBounds.width : 800,
+    height: windowBounds ? windowBounds.height : 600,
   });
 
-  // and load the index.html of the app.
+  // Laden der Anwendungs-URL
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
-  mainWindow.setBackgroundColor('#56cc5b10') // turns opaque brown
-  // Open the DevTools.
-  
-  //mainWindow.webContents.openDevTools();
+
+  // Überwachung von Änderungen an der Fenstergröße und -position
+
+  mainWindow.on('close', () => {
+    saveWindowBounds();
+  });
 };
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
+// Funktion zum Speichern der Fenstergröße und -position
+const saveWindowBounds = () => {
+  try {
+    fs.writeFileSync(
+      path.join(__dirname, 'WindowSettings.json'),
+      JSON.stringify(mainWindow.getBounds())
+    );
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 app.on('ready', createWindow);
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+  app.quit();
 });
-
-app.on('activate', () => {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
-  }
-});
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.

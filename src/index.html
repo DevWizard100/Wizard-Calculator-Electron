@@ -240,36 +240,16 @@
         window.resizeTo(328, 558)
     }
 
-    function ShiftToggle() {
-        let t = document.getElementById("ShiftButton");
-        if (t.value == "YES") {
-            t.value = "NO";
-            document.getElementById("x3").style.display = "table-cell";
-            document.getElementById("x2").style.display = "none";
-            document.getElementById("sqrtnormal").innerHTML = "³√";
-            document.getElementById("ShiftButton").style.backgroundColor = "#22222b";
-            document.getElementById("ShiftButton").style.color = "lightgray";
-            document.getElementById("ShiftButton").style.cursor = "default";
-
-        } else if (t.value == "NO") {
-            t.value = "YES";
-            document.getElementById("x3").style.display = "none";
-            document.getElementById("x2").style.display = "table-cell";
-            document.getElementById("sqrtnormal").innerHTML = "x√";
-            document.getElementById("ShiftButton").style.backgroundColor = "transparent";
-            document.getElementById("ShiftButton").style.color = "white";
-            document.getElementById("ShiftButton").style.cursor = "pointer";
-        }
-    }
 
     //Entweder x√ als Quadratwurzel oder ³√ als Quadratwurzel hinzufügen abhängig davon ob Shift aktiv ist oder nicht
     function appendSqrt() {
         let t = document.getElementById("ShiftButton");
-        if (t.value == "YES") {
-            document.getElementById("resultArea").innerHTML += "x√";
-        } else if (t.value == "NO") {
-            document.getElementById("resultArea").innerHTML = "";
-            document.getElementById("resultArea").innerHTML += "³√";
+        let container = document.getElementById("resultArea");
+        if (container.innerHTML == "0") {
+            document.getElementById("resultArea").innerHTML = "³√";
+
+        } else {
+            document.getElementById("resultArea").innerHTML += "x√"
         }
     }
 
@@ -278,151 +258,105 @@
 
 <body>
 <div class="font-change">
-<div class="menu">
+    <div class="menu">
 
-    <button class="btn" onclick="openNav()">
-        <i class="fa fa-bars"></i></button>
-    <p class="titlebar1">Standard</p>
+        <button class="btn" onclick="openNav()">
+            <i class="fa fa-bars"></i></button>
+        <p class="titlebar1">Standard</p>
 
-    <button id="restoretaskbtn" onclick="restoretask()">◀</button>
+        <button id="restoretaskbtn" onclick="restoretask()">◀</button>
 
-    <button onclick="ExtendWindowSize()" class="Extendbtn">Extend</button>
-    <button onclick="MinimizeWindowSize()" class="Minimizebtn">Minimize</button>
-</div>
-
-
-
-<div class="menu2">
-    <div id="myProgress">
-        <div id="myBar"></div>
+        <button onclick="ExtendWindowSize()" id="Extendbtn" class="Extendbtn">Extend</button>
+        <button onclick="MinimizeWindowSize()" class="Minimizebtn">Minimize</button>
     </div>
 
 
-    <div id="resultArea">0</div>
-
-
-    <div id="MessageBox">The result was copied!</div>
-
-
-    <div id="QuickResultAreaStyle">
-        <div id="QuickResultArea">
-            <span style="display: none" class="ResultInfo">Result</span>
-            <button id="ShiftButton" value="YES" onclick="ShiftToggle();">Function</button>
-            <span onclick="ShowCopyMessage()" id="QuickResult"></span>
+    <div class="menu2">
+        <div id="myProgress">
+            <div id="myBar"></div>
         </div>
-    </div>
 
-    <table>
-        <tr>
-            <td id="x2" onclick="appendOperation('²')">x²</td>
-            <td style="display: none" id="x3" onclick="appendOperation('³')">x³</td>
-            <td id="root1" onclick="appendOperation('√')">√</td>
-            <td onclick="deleteall()"><span style="text-decoration: underline">C</span></td>
-            <td onclick="deleteLast()"><span style="display: flex; justify-content: center; font-size: 22px;"
-                                             class="material-icons">
+        <div id="resultArea">0</div>
+
+        <div id="MessageBox">The result was copied!</div>
+
+        <div id="QuickResultAreaStyle">
+            <div id="QuickResultArea">
+                <span style="display: none" class="ResultInfo">Result</span>
+
+                <div class="Resultlbl">Result</div>
+                <span onclick="ShowCopyMessage()" id="QuickResult"></span>
+            </div>
+        </div>
+
+        <table>
+            <tr>
+                <td id="x2" onclick="appendOperation('²')">x²</td>
+                <td style="display: none" id="x3" onclick="appendOperation('³')">x³</td>
+                <td id="root1" onclick="appendOperation('√')">√</td>
+                <td onclick="deleteall()"><span style="text-decoration: underline">C</span></td>
+                <td onclick="deleteLast()"><span style="display: flex; justify-content: center; font-size: 22px;"
+                                                 class="material-icons">
                     backspace
                 </span></td>
-        </tr>
-        <tr>
-            <td onclick="appendOperation(' ( ')">(</td>
-            <td onclick="appendOperation(' ) ')">)</td>
-            <td onclick="roundresult()">r</td>
-            <td onclick="appendOperation(' / ')" class="highlight">/</td>
-            <td class="ErweiterteFunktionen" onclick="appendOperation('^')">^</td>
-        </tr>
-        <tr>
-            <td class="highlightnumbers" onclick="appendOperation(7)">7</td>
-            <td class="highlightnumbers" onclick="appendOperation(8)">8</td>
-            <td class="highlightnumbers" onclick="appendOperation(9)">9</td>
-            <td onclick="appendOperation(' × ')" class="highlight">x</td>
-            <td id="sqrtnormal" class="ErweiterteFunktionen" onclick="appendSqrt()">x√</td>
-            <td style="display: none" id="sqrt3" class="ErweiterteFunktionen" onclick="appendOperation('³√')">³√</td>
-        </tr>
+            </tr>
+            <tr>
+                <td onclick="appendOperation(' ( ')">(</td>
+                <td onclick="appendOperation(' ) ')">)</td>
+                <td onclick="roundresult()">r</td>
+                <td onclick="appendOperation(' / ')" class="highlight">/</td>
+                <td class="ErweiterteFunktionen" onclick="appendOperation('^')">^</td>
+            </tr>
+            <tr>
+                <td class="highlightnumbers" onclick="appendOperation(7)">7</td>
+                <td class="highlightnumbers" onclick="appendOperation(8)">8</td>
+                <td class="highlightnumbers" onclick="appendOperation(9)">9</td>
+                <td onclick="appendOperation(' × ')" class="highlight">x</td>
+                <td id="sqrtnormal" class="ErweiterteFunktionen" onclick="appendSqrt()">x√</td>
+                <td style="display: none" id="sqrt3" class="ErweiterteFunktionen" onclick="appendOperation('³√')">³√
+                </td>
+            </tr>
 
-        <tr>
-            <td class="highlightnumbers" onclick="appendOperation(4)">4</td>
-            <td class="highlightnumbers" onclick="appendOperation(5)">5</td>
-            <td class="highlightnumbers" onclick="appendOperation(6)">6</td>
-            <td onclick="appendOperation(' + ')" class="highlight">+</td>
-            <td class="ErweiterteFunktionen" onclick="appendOperation('%')">%</td>
-        </tr>
+            <tr>
+                <td class="highlightnumbers" onclick="appendOperation(4)">4</td>
+                <td class="highlightnumbers" onclick="appendOperation(5)">5</td>
+                <td class="highlightnumbers" onclick="appendOperation(6)">6</td>
+                <td onclick="appendOperation(' + ')" class="highlight">+</td>
+                <td class="ErweiterteFunktionen" onclick="appendOperation('%')">%</td>
+            </tr>
 
-        <tr>
-            <td class="highlightnumbers" onclick="appendOperation(1)">1</td>
-            <td class="highlightnumbers" onclick="appendOperation(2)">2</td>
-            <td class="highlightnumbers" onclick="appendOperation(3)">3</td>
-            <td onclick="appendOperation(' - ')" class="highlight">-</td>
+            <tr>
+                <td class="highlightnumbers" onclick="appendOperation(1)">1</td>
+                <td class="highlightnumbers" onclick="appendOperation(2)">2</td>
+                <td class="highlightnumbers" onclick="appendOperation(3)">3</td>
+                <td onclick="appendOperation(' - ')" class="highlight">-</td>
 
-            <td class="ErweiterteFunktionen" onclick="addpi()">π</td>
-        </tr>
+                <td class="ErweiterteFunktionen" onclick="addpi()">π</td>
+            </tr>
 
-        <tr>
-            <td class="highlight" colspan="2" onclick="appendOperation(0)">0</td>
-            <td onclick="appendOperation('.')">.</td>
-            <td onclick="ShowResult();" id="result">=</td>
-            <td class="ErweiterteFunktionen" onclick="appendOperation('log ')">log</td>
-        </tr>
-    </table>
-
-
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a class="navlink" onclick="notify3(), closeNav()" href="#">Start</a>
-        <a href="Services2.html">Services</a>
-        <a href="Settings.html">Settings</a>
-    </div>
+            <tr>
+                <td class="highlight" colspan="2" onclick="appendOperation(0)">0</td>
+                <td onclick="appendOperation('.')">.</td>
+                <td onclick="ShowResult();" id="result">=</td>
+                <td class="ErweiterteFunktionen" onclick="appendOperation('log ')">log</td>
+            </tr>
+        </table>
 
 
-    <div id="contextMenu">
-        <a onclick="deleteall();" href="#">Clear</a>
-        <a onclick="ShowCopyMessage();" href="#">Copy Result</a>
-        <a onclick="window.close();" href="#">Exit</a>
-        <a onclick="loadWindowPosition()" href="#">Re. Win. Pos.</a>
-    </div>
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a class="navlink" onclick="notify3(), closeNav()" href="#">Start</a>
+            <a href="Services2.html">Services</a>
+            <a href="Settings.html">Settings</a>
+        </div>
+
+
+        <div id="contextMenu">
+            <a onclick="deleteall();" href="#">Clear</a>
+            <a onclick="ShowCopyMessage();" href="#">Copy Result</a>
+            <a onclick="restoretask();" href="#">Restore</a>
+            <a onclick="window.close();" href="#">Exit App</a>
+        </div>
 
     </div>
 </body>
-
-    <script>
-
-        // Speichere die aktuelle Fensterposition im local storage
-        function saveWindowPosition() {
-            const x = window.screenX;
-            const y = window.screenY;
-            localStorage.setItem('windowPosition', JSON.stringify({x, y}));
-        }
-
-        // Lade die Fensterposition aus dem local storage
-        function loadWindowPosition() {
-            const pos = JSON.parse(localStorage.getItem('windowPosition'));
-            if (pos) {
-                window.moveTo(pos.x, pos.y);
-            }
-
-            saveWindowPosition()
-        }
-
-        // Speichere die Fensterposition, wenn sich die Fensterposition ändert
-        window.addEventListener('click', saveWindowPosition);
-
-        // Lade die Fensterposition beim Laden der Seite
-        //window.addEventListener('load', loadWindowPosition);
-
-
-        function savetask() {
-            document.getElementById("restoretaskbtn").style.display = "block";
-            sessionStorage.setItem('divContent', document.getElementById('resultArea').innerHTML);
-        }
-
-        function restoretask() {
-            document.getElementById('resultArea').innerHTML = sessionStorage.getItem('divContent')
-
-            document.getElementById("restoretaskbtn").style.display = "none";
-
-
-            let container = document.getElementById('resultArea');
-            let QuickResult = document.getElementById("QuickResult")
-            QuickResult.innerHTML = container.innerText;
-            calculateResult();
-        }
-    </script>

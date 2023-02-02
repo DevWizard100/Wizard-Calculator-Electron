@@ -41,11 +41,13 @@
     <h3>Wizard Calculator 1.0.0 <p>© 2022 Wizard.</p>
         <p id="System1"></p>
     </h3>
-    <div class="languagesbutton">
+    <div class="languagesbutton custom-button">
         <button onclick="OpenWindow()" class="css-button-gradient--8">Show Services</button>
 
-
+    <p></p>
     </div>
+
+    <h2>Change Application Font:</h2>
 
     <select id="font-selector">
         <option value="Arial">Arial</option>
@@ -60,9 +62,13 @@
             color: white;
             border-radius: 7px;
             padding: 5px;
-            margin-left: 20px;
-            margin-top: 15px;
+            margin-left: 19px;
+            animation: ease-in-out 200ms;
         }
+
+        #font-selector:hover {
+            background-color: #191922;
+                }
     </style>
 </div>
 

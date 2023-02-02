@@ -25,7 +25,6 @@ function ShowCopyMessage() {
 }
 
 
-
 function DisableCopyMessage() {
     document.getElementById("MessageBox").style.display = "none";
 }
@@ -147,8 +146,6 @@ document.addEventListener("click", e => {
 });
 
 
-
-
 // Alle Keybinds für die Tastatur!
 document.onkeydown = function (e) {
     let keyCode = e.keyCode;
@@ -253,36 +250,81 @@ document.onkeydown = function (e) {
 };
 
 
-// Speichere die aktuelle Fenstergröße im local storage
-    function saveWindowSize() {
-        const width = window.outerWidth;
-        const height = window.outerHeight;
-        localStorage.setItem('windowSize', JSON.stringify({ width, height }));
-    }
-
-    // Lade die Fenstergröße aus dem local storage
-    function loadWindowSize() {
-        const size = JSON.parse(localStorage.getItem('windowSize'));
-        if (size) {
-            window.resizeTo(size.width, size.height);
-        }
-    else
-    {
-        window.resizeTo(328, 558);
-    }
-    }
 
 
-    // Speichere die Fenstergröße, wenn sich die Fenstergröße ändert
-    window.addEventListener('resize', saveWindowSize);
-
-    // Lade die Fenstergröße beim Laden der Seite
-    window.addEventListener('load', loadWindowSize);
-
-    // Beim Seitenaufruf die ausgewählte Schriftart aus dem localStorage laden
+// Beim Seitenaufruf die ausgewählte Schriftart aus dem localStorage laden
 const selectedFont = localStorage.getItem('selectedFont');
 if (selectedFont) {
     document.body.style.fontFamily = selectedFont;
     selector.value = selectedFont;
 }
 
+//Aufgabe vor dem Ausrechnen Zwischenspeichern
+        function savetask() {
+    document.getElementById("restoretaskbtn").style.display = "block";
+    sessionStorage.setItem('divContent', document.getElementById('resultArea').innerHTML);
+}
+
+        function restoretask() {
+    document.getElementById('resultArea').innerHTML = sessionStorage.getItem('divContent')
+
+            document.getElementById("restoretaskbtn").style.display = "none";
+
+
+    let container = document.getElementById('resultArea');
+    let QuickResult = document.getElementById("QuickResult")
+            QuickResult.innerHTML = container.innerText;
+    calculateResult();
+}
+
+
+//unused backup code
+
+function ShiftToggle() {
+    let t = document.getElementById("ShiftButton");
+    if (t.value == "YES") {
+        t.value = "NO";
+        document.getElementById("x3").style.display = "table-cell";
+        document.getElementById("x2").style.display = "none";
+        document.getElementById("sqrtnormal").innerHTML = "³√";
+        document.getElementById("ShiftButton").style.backgroundColor = "#22222b";
+        document.getElementById("ShiftButton").style.color = "lightgray";
+        document.getElementById("ShiftButton").style.cursor = "default";
+
+    } else if (t.value == "NO") {
+        t.value = "YES";
+        document.getElementById("x3").style.display = "none";
+        document.getElementById("x2").style.display = "table-cell";
+        document.getElementById("sqrtnormal").innerHTML = "x√";
+        document.getElementById("ShiftButton").style.backgroundColor = "transparent";
+        document.getElementById("ShiftButton").style.color = "white";
+        document.getElementById("ShiftButton").style.cursor = "pointer";
+    }
+}
+
+
+
+
+// Speichere die aktuelle Fenstergröße im local storage
+//function saveWindowSize() {
+//    const width = window.outerWidth;
+//    const height = window.outerHeight;
+//    localStorage.setItem('windowSize', JSON.stringify({width, height}));
+//}
+
+//// Lade die Fenstergröße aus dem local storage
+//function loadWindowSize() {
+//    const size = JSON.parse(localStorage.getItem('windowSize'));
+//    if (size) {
+//        window.resizeTo(size.width, size.height);
+//    } else {
+//        window.resizeTo(328, 558);
+//    }
+//}
+
+
+//// Speichere die Fenstergröße, wenn sich die Fenstergröße ändert
+//window.addEventListener('resize', saveWindowSize);
+
+//// Lade die Fenstergröße beim Laden der Seite
+//window.addEventListener('load', loadWindowSize);
